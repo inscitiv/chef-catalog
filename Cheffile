@@ -1,0 +1,46 @@
+#!/usr/bin/env ruby
+#^syntax detection
+
+site 'http://community.opscode.com/api/v1'
+
+cookbook 'apache2'
+cookbook 'apt'
+cookbook 'aws'
+cookbook 'build-essential'
+cookbook 'git'
+cookbook 'graylog2'
+cookbook 'install_from'
+cookbook 'iptables'
+cookbook 'java'
+cookbook 'jenkins'
+cookbook 'monit'
+cookbook 'mysql'
+cookbook 'nginx'
+cookbook 'node'
+cookbook 'nscd'
+cookbook 'openldap'
+cookbook 'openssh'
+cookbook 'openssl'
+cookbook 'php'
+cookbook 'postgresql'
+#cookbook 'R'
+cookbook 'rabbitmq'
+cookbook 'redis'
+cookbook 'revealcloud'
+cookbook 'rsync'
+cookbook 'runit'
+cookbook 'rvm'
+cookbook 'sudo'
+cookbook 'tomcat6'
+cookbook 'unicorn'
+cookbook 'wordpress'
+cookbook 'xfs'
+cookbook 'xml'
+cookbook 'yum'
+
+# cookbook 'rvm',
+#   :git => 'https://github.com/fnichol/chef-rvm'
+
+# cookbook 'postgresql',
+#   :git => 'https://github.com/findsyou/cookbooks',
+#   :ref => 'postgresql-improvements'
