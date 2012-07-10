@@ -25,7 +25,9 @@ cookbook 'php'
 cookbook 'postgresql'
 #cookbook 'R'
 cookbook 'rabbitmq'
-cookbook 'redis'
+cookbook 'redis-database', 
+  :git => "git://github.com/AtariTech/cookbooks.git",
+  :path => "redis"
 cookbook 'revealcloud'
 cookbook 'rsync'
 cookbook 'runit'
