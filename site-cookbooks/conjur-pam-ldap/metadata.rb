@@ -1,0 +1,7 @@
+maintainer       "Inscitiv Inc"
+maintainer_email "ops@inscitiv.com"
+license          "All rights reserved"
+description      "Installs/Configures PAM LDAP service for inscitiv"
+version          "0.1.0"
+depends          "conjur-config"
+supports         "ubuntu"
