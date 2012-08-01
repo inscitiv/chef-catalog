@@ -1,1 +1,1 @@
-include_recipe "logstash::agent"
+include_recipe "rsyslog::client"

@@ -1,9 +1,6 @@
 SITE
   remote: http://community.opscode.com/api/v1
   specs:
-    ant (0.10.1)
-      java (>= 0)
-      jpackage (>= 0)
     apache2 (1.1.10)
     apt (1.4.2)
     aws (0.100.0)
@@ -26,8 +23,6 @@ SITE
     jenkins (0.6.3)
       java (>= 0.0.0)
       runit (>= 0.0.0)
-    jpackage (0.10.0)
-      java (>= 0)
     logrotate (0.8.2)
     monit (0.7.0)
     mysql (1.2.6)
@@ -54,14 +49,13 @@ SITE
       xml (>= 0.0.0)
     postgresql (0.99.4)
       openssl (>= 0.0.0)
-    python (1.0.6)
-      build-essential (>= 0.0.0)
     rabbitmq (1.4.0)
       apt (>= 1.1)
       erlang (>= 0.9)
       yum (>= 0.5.0)
     revealcloud (0.0.6)
     rsync (0.7.0)
+    rsyslog (1.1.0)
     runit (0.15.0)
     rvm (0.0.4)
       apt (>= 0)
@@ -88,23 +82,6 @@ GIT
   specs:
     redis-database (1.0.0)
 
-GIT
-  remote: git://github.com/lusis/chef-logstash.git
-  ref: master
-  sha: 954e5d4d6c1f33cc45d317772dca1a058790ee45
-  specs:
-    logstash (0.2.1)
-      ant (>= 0.0.0)
-      apache2 (>= 0.0.0)
-      build-essential (>= 0.0.0)
-      git (>= 0.0.0)
-      java (>= 0.0.0)
-      logrotate (>= 0.0.0)
-      php (>= 0.0.0)
-      python (>= 0.0.0)
-      rabbitmq (>= 0.0.0)
-      runit (>= 0.0.0)
-
 DEPENDENCIES
   apache2 (>= 0)
   apt (>= 0)
@@ -116,7 +93,7 @@ DEPENDENCIES
   iptables (>= 0)
   java (>= 0)
   jenkins (>= 0)
-  logstash (>= 0)
+  logrotate (>= 0)
   monit (>= 0)
   mysql (>= 0)
   nginx (>= 0)
@@ -131,6 +108,7 @@ DEPENDENCIES
   redis-database (>= 0)
   revealcloud (>= 0)
   rsync (>= 0)
+  rsyslog (>= 0)
   runit (>= 0)
   rvm (>= 0)
   sudo (>= 0)

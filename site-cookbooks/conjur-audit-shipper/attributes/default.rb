@@ -1,1 +1,1 @@
-normal['logstash']['agent']['xms'] = "32M"
+default['rsyslog']['port'] = 514
