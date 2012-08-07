@@ -16,7 +16,9 @@ cookbook 'jenkins'
 cookbook 'monit'
 cookbook 'mysql'
 cookbook 'nginx'
-cookbook 'node'
+cookbook 'node',
+	:git => 'https://github.com/digitalbutter/cookbook-node.git',
+	:ref => '7c2021167ac7a4f84773fc8ab8d33fb159738a8a'
 cookbook 'nscd'
 cookbook 'openldap'
 cookbook 'openssh'

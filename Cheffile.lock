@@ -33,8 +33,6 @@ SITE
       ohai (~> 1.0.2)
       runit (>= 0.0.0)
       yum (>= 0.0.0)
-    node (0.0.6)
-      git (>= 0.0.0)
     nscd (0.7.0)
     ohai (1.0.2)
     openldap (0.9.3)
@@ -70,7 +68,15 @@ SITE
       php (>= 0.0.0)
     xfs (1.0.0)
     xml (1.0.4)
-    yum (0.6.2)
+    yum (0.8.0)
+
+GIT
+  remote: https://github.com/digitalbutter/cookbook-node.git
+  ref: 7c2021167ac7a4f84773fc8ab8d33fb159738a8a
+  sha: 7c2021167ac7a4f84773fc8ab8d33fb159738a8a
+  specs:
+    node (0.0.6)
+      git (>= 0.0.0)
 
 DEPENDENCIES
   apache2 (>= 0)
