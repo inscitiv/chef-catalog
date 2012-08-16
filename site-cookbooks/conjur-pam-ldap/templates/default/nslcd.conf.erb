@@ -7,7 +7,7 @@ uid nslcd
 gid nslcd
 
 # The location at which the LDAP server(s) should be reachable.
-uri <%= @ldap_uri %>
+uri <%= @uri %>
 
 # The search base that will be used for all queries.
 base  prj=<%= @project %>,<%= @hostname %>,o=members
