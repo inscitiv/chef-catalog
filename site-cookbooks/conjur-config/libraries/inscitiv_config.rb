@@ -10,6 +10,10 @@ module Inscitiv
 			end
 		end
 		
+		def inscitiv_owner
+		  node.inscitiv[:owner]
+		end
+		
 		def inscitiv_admin_groups
 		  node.inscitiv[:admin_groups] || []
 		end

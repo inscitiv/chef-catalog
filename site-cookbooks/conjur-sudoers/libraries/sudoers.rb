@@ -13,7 +13,10 @@ module Conjur
     # end
     # > cn=Developer, prj=platform, dc=conjur, dc=inscitivops, dc=com, o=members
     # > cn=Manager, prj=platform, dc=conjur, dc=inscitivops, dc=com, o=members
-
+    
+    def parseable?
+      `augtool "match /augeas/files/etc/sudoers/error"`.match("/augeas/files/etc/sudoers/error") == 0
+    end
     
     def sync(remove_groups, add_groups, add_user = nil, base = '/')
       require 'augeas'

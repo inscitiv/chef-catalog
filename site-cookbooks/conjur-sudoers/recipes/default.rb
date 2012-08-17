@@ -14,7 +14,8 @@ conjur_groups = []
 
 ldap_config = inscitiv_ldap_config
 
-conn = LDAP::Conn.new(host=ldap_config.uri.hostname, port=ldap_config.uri.port)
+require 'ldap'
+conn = LDAP::Conn.new(ldap_config.uri.host, ldap_config.uri.port)
 conn.bind("prj=#{ldap_config.project},#{ldap_config.hostname},o=root", ldap_config.root_bind_password)
 conn.search("prj=#{ldap_config.project},#{ldap_config.hostname},o=members", LDAP::LDAP_SCOPE_SUBTREE, '(objectclass=group)') do |entry|
   group = entry.dn.split(", ")[0].split("=")[1]
@@ -23,18 +24,20 @@ end
 
 conjur_sudo_groups = inscitiv_admin_groups
 conjur_groups -= conjur_sudo_groups
+owner = inscitiv_owner
 
-if `augtool "match /augeas/files/etc/sudoers/error"`.match("/augeas/files/etc/sudoers/error") == 0
-  ruby_block "sync root users" do
-    block do
-Conjur::Sudoers.sync conjur_groups, conjur_sudo_groups
-    end
+if Conjur::Sudoers.parseable?
+  conjur_sudoers_poke "sudoers" do
+    include_groups conjur_sudo_groups
+    exclude_groups conjur_groups
+    owner owner
   end
 else
   Chef::Log.warn "Unable to parse /etc/sudoers. Installing new /etc/sudoers"
-  cookbook_file "/etc/sudoers" do
-    source "sudoers"
+  template "/etc/sudoers" do
+    source "sudoers.erb"
     mode "0440"
+    variables :sudo_groups => conjur_sudo_groups, :owner => owner
   end
 end
 

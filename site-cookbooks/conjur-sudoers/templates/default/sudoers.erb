@@ -24,3 +24,13 @@ root  ALL=(ALL) ALL
 # ubuntu user is default user in ec2-images.  
 # It needs passwordless sudo functionality.
 ubuntu  ALL=(ALL) NOPASSWD:ALL
+
+# Conjur admin groups
+<% for group in @sudo_groups %>
+%<%= group %> ALL=(ALL) NOPASSWD:ALL
+<% end %>
+
+<% if @owner %>
+# Conjur server owner
+<%= @owner %> ALL=(ALL) NOPASSWD:ALL
+<% end %>
