@@ -18,6 +18,12 @@ describe "conjur-sudoers" do
     ldap.should_receive(:bind)
     ldap.should_receive(:search).and_yield(entry1).and_yield(entry2)
   end
+  before(:each) do
+    # Tame build-essential
+    provider = mock(:provider).as_null_object
+    Chef::Provider::Execute.stub(:new).and_return provider
+    Chef::Provider::Package.stub(:new).and_return provider
+  end
   context "parseable sudoers" do
     before(:each) do
       Conjur::Sudoers.should_receive(:parseable?).and_return true
