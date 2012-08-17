@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'librarian'
 gem 'chef'
 gem 'spork'
 gem 'rspec'
