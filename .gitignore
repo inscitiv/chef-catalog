@@ -1,3 +1,4 @@
 cookbooks
 tmp
+spec/reports
 spec/data/tmp/*
