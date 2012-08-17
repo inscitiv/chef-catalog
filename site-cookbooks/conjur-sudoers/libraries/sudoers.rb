@@ -1,23 +1,14 @@
 module Conjur
   module Sudoers
-    # Remove named groups from sudoers.
-    # Add named groups to sudoers.
-    
-    # TODO: search for packages using ldap
-    # libldap2-dev, libsasl2-dev, gem ruby-ldap
-    
-    # http://www.tutorialspoint.com/ruby/ruby_ldap.htm
-    # conn.bind("prj=platform,dc=conjur,dc=inscitivops,dc=com,o=root", "08b77c589fc6f76034e234c5365bf20741fbbb53")
-    # conn.search("prj=platform,dc=conjur,dc=inscitivops,dc=com,o=members", LDAP::LDAP_SCOPE_SUBTREE, '(objectclass=group)') do |entry|
-    #   puts entry.dn
-    # end
-    # > cn=Developer, prj=platform, dc=conjur, dc=inscitivops, dc=com, o=members
-    # > cn=Manager, prj=platform, dc=conjur, dc=inscitivops, dc=com, o=members
-    
-    def parseable?
-      `augtool "match /augeas/files/etc/sudoers/error"`.match("/augeas/files/etc/sudoers/error") == 0
+    def parseable?(base = '/')
+      require 'augeas'
+      Augeas::open(base) do |aug|
+        aug.match("/augeas/files/etc/sudoers/error").empty?
+      end
     end
     
+    # Remove named groups from sudoers.
+    # Add named groups to sudoers.
     def sync(remove_groups, add_groups, add_user = nil, base = '/')
       require 'augeas'
       Augeas::open(base) do |aug|

@@ -1,10 +1,15 @@
 if node[:ec2]
-  # TODO: determine swap size by looking at memory.total
-  swap_file, swap_mb = if node.ec2.instance_type == "t1.micro"
-    [ "/var/swap.1", 1000 ]
+  # Create a swap file equal to 50% of system memory
+  swap_file = '/var/swap.1'
+  total_memory = node.memory.total
+  swap_mb = if total_memory =~ /(.*)mb/i
+    $1.to_i / 2
+  elsif total_memory =~ /(.*)kb/i
+    $1.to_i / 1000 / 2
   else
-    [ "/var/swap.1", 10000 ]
+    raise "Cannot parse #{total_memory} into MB"
   end
+  
   Chef::Log.info "Making #{swap_mb}mb swap file #{swap_file}"
   bash "Make swap space" do
     code <<-EOH
