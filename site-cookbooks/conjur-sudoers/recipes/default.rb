@@ -1,9 +1,11 @@
-package 'pkg-config'
-package 'libaugeas-dev'
-chef_gem 'ruby-augeas'
+include_recipe "build-essential"
 
-package 'libldap2-dev'
-package 'libsasl2-dev'
+for p in %w(pkg-config libaugeas-dev libldap2-dev libsasl2-dev)
+  package p do
+  end.run_action(:install)
+end
+
+chef_gem 'ruby-augeas'
 chef_gem 'ruby-ldap'
 
 # This recipe will only manage Conjur system groups
