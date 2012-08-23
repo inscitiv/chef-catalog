@@ -13,6 +13,7 @@ cookbook 'install_from'
 cookbook 'iptables'
 cookbook 'java'
 cookbook 'jenkins'
+cookbook 'logrotate'
 cookbook 'monit'
 cookbook 'mysql'
 cookbook 'nginx'
@@ -38,9 +39,6 @@ cookbook 'wordpress'
 cookbook 'xfs'
 cookbook 'xml'
 cookbook 'yum'
-
-cookbook 'logstash',
-  :git => 'git://github.com/lusis/chef-logstash.git'
 
 # cookbook 'rvm',
 #   :git => 'https://github.com/fnichol/chef-rvm'

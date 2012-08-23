@@ -1,4 +1,3 @@
-
 server_event_config = conjur_server_event_config
 template "/opt/inscitiv/bin/authevent" do
   source "authevent.erb"
