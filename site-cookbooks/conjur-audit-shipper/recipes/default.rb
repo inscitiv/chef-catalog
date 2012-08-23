@@ -1,4 +1,16 @@
 server_event_config = conjur_server_event_config
+
+package 'libxml2-dev' do
+end.run_action(:install)
+package 'libxslt-dev' do
+end.run_action(:install)
+
+chef_gem 'aws-sdk'
+
+directory "/opt/inscitiv/bin" do
+  recursive true
+end
+
 template "/opt/inscitiv/bin/authevent" do
   source "authevent.erb"
   mode "0755"
