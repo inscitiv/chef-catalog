@@ -1,8 +1,9 @@
 module Inscitiv
 	module Config
     LDAPConfig = Struct.new(:hostname, :project, :root_bind_password, :uri)
+    EventConfig = Struct.new(:queue, :access_key_id, :secret_access_key)
 
-		def inscitiv_env
+		def conjur_env
 			if env = node.inscitiv[:environment]
 				env
 			else
@@ -10,17 +11,21 @@ module Inscitiv
 			end
 		end
 		
-		def inscitiv_owner
+		def conjur_server_event_config
+		  EventConfig.new(node.inscitiv.aws_users.server_events[:queue_url], node.inscitiv.aws_users.server_events[:access_key_id], node.inscitiv.aws_users.server_events[:secret_access_key])
+		end
+    
+		def conjur_owner
 		  node.inscitiv[:owner]
 		end
 		
-		def inscitiv_admin_groups
+		def conjur_admin_groups
 		  node.inscitiv[:admin_groups] || []
 		end
 		
-		def inscitiv_ldap_config
+		def conjur_ldap_config
 		  uri = node.inscitiv.ldap['uri'] ||
-        case inscitiv_env
+        case conjur_env
         when 'development'
           # An SSH tunnel back to your local machine will be required to make this work
           "ldap://localhost:1389"
@@ -30,8 +35,8 @@ module Inscitiv
           "ldap://ldap.inscitiv.net:1389"
         end
       root_bind_password = node.inscitiv.ldap.root_bind_password
-      project = inscitiv_project
-      hostname, port = inscitiv_server_hostname.split(":")
+      project = conjur_project
+      hostname, port = conjur_server_hostname.split(":")
       
       host_string = hostname.split(".").collect{|dc| "dc=#{dc}"}
       if port
@@ -44,7 +49,7 @@ module Inscitiv
       return LDAPConfig.new(hostname, project, root_bind_password, URI.parse(uri))
 		end
 
-		def inscitiv_server_hostname
+		def conjur_server_hostname
 			if hostname = node.inscitiv[:server_hostname]
 				hostname
 			else
@@ -52,7 +57,7 @@ module Inscitiv
 			end
 		end
 
-		def inscitiv_project
+		def conjur_project
 			if project = node.inscitiv[:project]
 				project
 			else

@@ -14,7 +14,7 @@ chef_gem 'ruby-ldap'
 
 conjur_groups = []
 
-ldap_config = inscitiv_ldap_config
+ldap_config = conjur_ldap_config
 
 require 'ldap'
 conn = LDAP::Conn.new(ldap_config.uri.host, ldap_config.uri.port)
@@ -24,9 +24,9 @@ conn.search("prj=#{ldap_config.project},#{ldap_config.hostname},o=members", LDAP
   conjur_groups << group
 end
 
-conjur_sudo_groups = inscitiv_admin_groups
+conjur_sudo_groups = conjur_admin_groups
 conjur_groups -= conjur_sudo_groups
-owner = inscitiv_owner
+owner = conjur_owner
 
 if Conjur::Sudoers.parseable?
   conjur_sudoers_poke "sudoers" do

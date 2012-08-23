@@ -31,7 +31,7 @@ execute "allow PasswordAuthentication" do
 	notifies :restart, "service[ssh]"
 end
 
-ldap_config = inscitiv_ldap_config
+ldap_config = conjur_ldap_config
 
 template "/etc/nslcd.conf" do
 	source "nslcd.conf.erb"

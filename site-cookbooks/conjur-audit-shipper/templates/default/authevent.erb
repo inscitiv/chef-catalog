@@ -1,0 +1,4 @@
+#!/bin/bash
+EC2_ACCESS_KEY=<%= @access_key %>
+EC2_SECRET_KEY=<%= @secret_key %>
+aws send-message <%= @queue %> $1

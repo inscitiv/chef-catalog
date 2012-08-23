@@ -5,7 +5,7 @@ require 'libraries/sudoers'
 describe "conjur-sudoers" do
 #  let(:log_level) { :debug }
   let(:json_attributes) { 
-    $ohai.data.merge(inscitiv_attributes).tap do |attrs|
+    $ohai.data.merge(conjur_attributes).tap do |attrs|
       attrs[:inscitiv][:admin_groups] = [ "Managers" ]
     end
   }

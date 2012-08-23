@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 require 'chef/node'
-require 'libraries/inscitiv_config'
+require 'libraries/conjur_config'
 require 'uri'
 
 PseudoRecipe = Struct.new(:node) do
@@ -16,19 +16,26 @@ describe Inscitiv::Config do
   }
   let(:recipe) { PseudoRecipe::new(chef_node) }
   context "with some standard attributes" do
-    let(:attributes) { inscitiv_attributes }
+    let(:attributes) { conjur_attributes }
     subject { recipe }
-    its(:inscitiv_project) { should == "test" }
-    its(:inscitiv_admin_groups) { should == [] }
+    its(:conjur_project) { should == "test" }
+    its(:conjur_admin_groups) { should == [] }
     context "ldap" do
-      subject { recipe.inscitiv_ldap_config }
+      subject { recipe.conjur_ldap_config }
       its("uri") { should == URI.parse("ldap://ldap.inscitiv.net:1389") }
-      its("project") { should == recipe.inscitiv_project }
+      its("project") { should == recipe.conjur_project }
       its("root_bind_password") { should == "secret" }
       its("hostname") { should == "dc=localhost,dc=localdomain" }
     end
+    context "server_event" do
+      subject { recipe.conjur_server_event_config }
+      let(:attrs) { conjur_attributes[:inscitiv][:aws_users][:server_events] }
+      its("queue") { should == attrs[:queue_url] }
+      its("access_key_id") { should == attrs[:access_key_id] }
+      its("secret_access_key") { should == attrs[:secret_access_key] }
+    end
     context "default values" do
-      its(:inscitiv_env) { should == "production" }
+      its(:conjur_env) { should == "production" }
     end
   end
 end
