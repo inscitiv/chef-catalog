@@ -1,4 +1,4 @@
-if node[:ec2]
+if node['ec2']
   # Create a swap file equal to 50% of system memory
   swap_file = '/var/swap.1'
   total_memory = node.memory.total
@@ -17,6 +17,6 @@ if node[:ec2]
       sudo /sbin/mkswap #{swap_file}
       sudo /sbin/swapon #{swap_file}
     EOH
-    not_if { File.exists?("#{swap_file}") }
+    not_if { File.exists?(swap_file) }
   end
 end

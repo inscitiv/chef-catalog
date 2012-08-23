@@ -4,7 +4,7 @@ module Inscitiv
     EventConfig = Struct.new(:queue, :access_key_id, :secret_access_key)
 
 		def conjur_env
-			if env = node.inscitiv[:environment]
+			if env = node.inscitiv['environment']
 				env
 			else
 				"production"
@@ -12,15 +12,15 @@ module Inscitiv
 		end
 		
 		def conjur_server_event_config
-		  EventConfig.new(node.inscitiv.aws_users.server_events[:queue_url], node.inscitiv.aws_users.server_events[:access_key_id], node.inscitiv.aws_users.server_events[:secret_access_key])
+		  EventConfig.new(node.inscitiv.aws_users.server_events['queue_url'], node.inscitiv.aws_users.server_events['access_key_id'], node.inscitiv.aws_users.server_events['secret_access_key'])
 		end
     
 		def conjur_owner
-		  node.inscitiv[:owner]
+		  node.inscitiv['owner']
 		end
 		
 		def conjur_admin_groups
-		  node.inscitiv[:admin_groups] || []
+		  node.inscitiv['admin_groups'] || []
 		end
 		
 		def conjur_ldap_config
@@ -50,7 +50,7 @@ module Inscitiv
 		end
 
 		def conjur_server_hostname
-			if hostname = node.inscitiv[:server_hostname]
+			if hostname = node.inscitiv['server_hostname']
 				hostname
 			else
 				raise "No inscitiv.hostname configured for this node"
@@ -58,7 +58,7 @@ module Inscitiv
 		end
 
 		def conjur_project
-			if project = node.inscitiv[:project]
+			if project = node.inscitiv['project']
 				project
 			else
 				raise "No inscitiv.project configured for this node"
