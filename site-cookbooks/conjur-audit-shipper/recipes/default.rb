@@ -13,7 +13,8 @@ end
 
 template "/opt/inscitiv/bin/authevent" do
   source "authevent.erb"
-  mode "0755"
+  mode "0500"
+  owner "syslog"
   variables :queue => server_event_config[:queue], :access_key => server_event_config[:access_key_id], :secret_key => server_event_config[:secret_access_key]
 end
 
