@@ -36,7 +36,7 @@ module Inscitiv
         end
       root_bind_password = node.inscitiv.ldap.root_bind_password
       project = conjur_project
-      hostname, port = conjur_server_hostname.split(":")
+      hostname, port = conjur_workspace_hostname.split(":")
       
       host_string = hostname.split(".").collect{|dc| "dc=#{dc}"}
       if port
@@ -49,11 +49,11 @@ module Inscitiv
       return LDAPConfig.new(hostname, project, root_bind_password, URI.parse(uri))
 		end
 
-		def conjur_server_hostname
-			if hostname = node.inscitiv['server_hostname']
+		def conjur_workspace_hostname
+			if hostname = node.inscitiv['workspace_hostname']
 				hostname
 			else
-				raise "No inscitiv.hostname configured for this node"
+				raise "No Conjur workspace_hostname configured for this node"
 			end
 		end
 
@@ -61,7 +61,7 @@ module Inscitiv
 			if project = node.inscitiv['project']
 				project
 			else
-				raise "No inscitiv.project configured for this node"
+				raise "No Conjur project configured for this node"
 			end
 		end
 	end

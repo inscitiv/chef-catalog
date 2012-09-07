@@ -4,7 +4,7 @@ def conjur_attributes
     :inscitiv => {
       :project => "test",
       :owner => "kgilpin",
-      :server_hostname => "localhost.localdomain",
+      :workspace_hostname => "localhost.localdomain",
       :ldap => {
         :root_bind_password => "secret"
       },
