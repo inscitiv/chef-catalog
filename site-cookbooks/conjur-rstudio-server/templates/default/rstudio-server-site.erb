@@ -1,6 +1,9 @@
 server {
   listen       80;
-  server_name  <%= node['hostname'] %>;
+  <%
+  names = ([ node['ec2']['public_hostname'], node['server_alias'] ] + (node['server_aliases'] || [])).compact
+  %>
+  server_name  <%= names.join(' ') %>;
 
   access_log   <%= node['nginx']['log_dir'] %>/rstudio-server.access.log;
 
