@@ -7,6 +7,10 @@ end.run_action(:install)
 
 chef_gem 'aws-sdk'
 
+service "rsyslog" do
+  action :nothing
+end
+
 directory "/opt/inscitiv/bin" do
   recursive true
 end
@@ -21,4 +25,5 @@ end
 
 cookbook_file "/etc/rsyslog.d/75-authevent.conf" do
   source "authevent.conf"
+  notifies :restart, resources(:service => "rsyslog")
 end
