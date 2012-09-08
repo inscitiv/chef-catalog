@@ -1,4 +1,5 @@
 package "r-base"
+include_recipe "nginx"
 
 # http://rstudio.org/download/server
 
@@ -21,6 +22,12 @@ else
   "i386"
 end
 
+service "rstudio-server" do
+  provider Chef::Provider::Service::Upstart
+  supports :status => true, :restart => true
+  action :nothing
+end
+
 dpkg_package "rstudio-server" do
   source "/tmp/rstudio-server-#{version}.deb"
   action :nothing
@@ -32,3 +39,24 @@ remote_file "/tmp/rstudio-server-#{version}.deb" do
   notifies :install, resources(:dpkg_package => 'rstudio-server')
 end
 
+directory "/etc/rstudio"
+
+cookbook_file "/etc/rstudio/rserver.conf" do
+  source "rserver.conf"
+  notifies :restart, resources(:service => 'rstudio-server')
+end
+
+template "#{node[:nginx][:dir]}/sites-available/rstudio-server" do
+  source "rstudio-server-site.erb"
+  owner "root"
+  group "root"
+  mode 0644
+end
+
+nginx_site "default" do
+  enable false
+end
+
+nginx_site "rstudio-server" do
+  enable true
+end

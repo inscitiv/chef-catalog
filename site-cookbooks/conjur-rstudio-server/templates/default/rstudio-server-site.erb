@@ -1,0 +1,13 @@
+server {
+  listen       80;
+  server_name  <%= node['hostname'] %>;
+
+  access_log   <%= node['nginx']['log_dir'] %>/rstudio-server.access.log;
+
+  location /rstudio/ {
+    rewrite ^/rstudio/(.*)$ /$1 break;
+    proxy_pass http://localhost:8787;
+    proxy_redirect http://localhost:8787/ $scheme://$host/rstudio/;
+  }
+}
+
