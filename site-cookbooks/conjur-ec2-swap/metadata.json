@@ -1,0 +1,30 @@
+{
+  "name": "conjur-ec2-swap",
+  "description": "Ensure there is swap space on an ec2 instance",
+  "long_description": "",
+  "maintainer": "Inscitiv Inc",
+  "maintainer_email": "ops@inscitiv.com",
+  "license": "All rights reserved",
+  "platforms": {
+    "ubuntu": ">= 0.0.0"
+  },
+  "dependencies": {
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+  },
+  "version": "0.1.0"
+}

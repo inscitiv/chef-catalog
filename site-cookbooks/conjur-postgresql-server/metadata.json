@@ -1,0 +1,61 @@
+{
+  "name": "conjur-postgresql-server",
+  "description": "Installs and configures postgresql server",
+  "long_description": "",
+  "maintainer": "Inscitiv, Inc.",
+  "maintainer_email": "ops@inscitiv.com",
+  "license": "Apache 2.0",
+  "platforms": {
+    "ubuntu": ">= 0.0.0",
+    "debian": ">= 0.0.0",
+    "fedora": ">= 0.0.0",
+    "suse": ">= 0.0.0",
+    "redhat": ">= 6.0",
+    "centos": ">= 6.0",
+    "scientific": ">= 6.0"
+  },
+  "dependencies": {
+    "postgresql": "= 0.99.4"
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+    "postgresql/password/postgres": {
+      "display_name": "postgres user password",
+      "type": "string",
+      "required": "required",
+      "choice": [
+
+      ],
+      "calculated": false,
+      "recipes": [
+
+      ]
+    },
+    "postgresql/version": {
+      "display_name": "postgresql database version",
+      "type": "string",
+      "required": "optional",
+      "choice": [
+
+      ],
+      "calculated": false,
+      "recipes": [
+
+      ]
+    }
+  },
+  "groupings": {
+  },
+  "recipes": {
+  },
+  "version": "0.1.0"
+}

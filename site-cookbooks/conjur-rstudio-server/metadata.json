@@ -1,0 +1,32 @@
+{
+  "name": "conjur-rstudio-server",
+  "description": "Installs and configures RStudio Server",
+  "long_description": "",
+  "maintainer": "Inscitiv, Inc.",
+  "maintainer_email": "ops@inscitiv.com",
+  "license": "Apache 2.0",
+  "platforms": {
+    "ubuntu": ">= 0.0.0",
+    "debian": ">= 0.0.0"
+  },
+  "dependencies": {
+    "nginx": ">= 0.0.0"
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+  },
+  "version": "0.1.0"
+}
