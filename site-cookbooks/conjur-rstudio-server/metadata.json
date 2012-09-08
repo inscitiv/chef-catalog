@@ -23,6 +23,19 @@
   "replacing": {
   },
   "attributes": {
+    "server_alias": {
+      "display_name": "server alias",
+      "description": "Additional hostname alias to apply to the server",
+      "type": "string",
+      "required": "optional",
+      "choice": [
+
+      ],
+      "calculated": false,
+      "recipes": [
+
+      ]
+    }
   },
   "groupings": {
   },

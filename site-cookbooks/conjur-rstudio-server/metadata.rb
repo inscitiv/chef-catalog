@@ -9,3 +9,9 @@ version           "0.1.0"
 end
 
 depends "nginx"
+
+attribute "server_alias",
+  :display_name => "server alias",
+  :description => "Additional hostname alias to apply to the server",
+  :type => "string",
+  :required => "optional"
