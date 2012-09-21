@@ -10,10 +10,16 @@ module Inscitiv
 				"production"
 			end
 		end
-		
-		def conjur_server_event_config
-		  EventConfig.new(node.inscitiv.aws_users.server_events['queue_url'], node.inscitiv.aws_users.server_events['access_key_id'], node.inscitiv.aws_users.server_events['secret_access_key'])
-		end
+
+    def conjur_identities
+      # TODO: aws_users is obsolete and can be removed once the cloud-conjur_identities branch is deployed
+      node.inscitiv['aws_users'] || node.inscitiv.identities
+    end
+
+    def conjur_server_event_config
+      identity = conjur_identities.server_events
+      EventConfig.new(identity['queue_url'], identity['access_key_id'], identity['secret_access_key'])
+    end
     
 		def conjur_owner
 		  node.inscitiv['owner']
