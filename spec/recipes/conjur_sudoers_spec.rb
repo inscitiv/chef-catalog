@@ -31,7 +31,7 @@ describe "conjur-sudoers" do
     it { should contain_chef_gem("ruby-augeas") }
     it do
       should RSpec::Chef::Matchers::ContainResource.new("contain_conjur-sudoers_poke", "sudoers").
-        with(:exclude_groups, [ "Developer" ]).
+        with(:exclude_groups, [ "Contributor" ]).
         with(:include_groups, [ "Manager" ]).
         with(:owner, "kgilpin") 
     end
