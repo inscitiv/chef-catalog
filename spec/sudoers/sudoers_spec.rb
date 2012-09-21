@@ -13,14 +13,14 @@ end
 
 shared_examples_for "synced" do
   before(:all) do
-    Conjur::Sudoers.sync [ 'admin' ], [ 'Developers' ], 'kgilpin', File.expand_path('..', etc_dir)
+    Conjur::Sudoers.sync [ 'admin' ], [ 'Developer' ], 'kgilpin', File.expand_path('..', etc_dir)
   end
   let(:file_body) { File.read(File.expand_path('sudoers', etc_dir)) }
   it "should not contain %admin" do
     file_body.should_not include("%admin")
   end
-  it "should contain %Developers" do
-    file_body.should include("%Developers")
+  it "should contain %Developer" do
+    file_body.should include("%Developer")
   end
   it "should contain %kgilpin" do
     file_body.should match(/\bkgilpin\b/)

@@ -6,12 +6,12 @@ describe "conjur-sudoers" do
 #  let(:log_level) { :debug }
   let(:json_attributes) { 
     $ohai.data.merge(conjur_attributes).tap do |attrs|
-      attrs[:inscitiv][:admin_groups] = [ "Managers" ]
+      attrs[:inscitiv][:admin_groups] = [ "Manager" ]
     end
   }
   let(:ldap) { mock(:ldap) }
-  let(:entry1) { mock(:entry1, :dn => "cn=Managers") }
-  let(:entry2) { mock(:entry2, :dn => "cn=Developers") }
+  let(:entry1) { mock(:entry1, :dn => "cn=Manager") }
+  let(:entry2) { mock(:entry2, :dn => "cn=Contributor") }
   before(:each) do
     require 'ldap'
     LDAP::Conn.should_receive(:new).with("ldap.inscitiv.net", 1389).and_return ldap
@@ -31,8 +31,8 @@ describe "conjur-sudoers" do
     it { should contain_chef_gem("ruby-augeas") }
     it do
       should RSpec::Chef::Matchers::ContainResource.new("contain_conjur-sudoers_poke", "sudoers").
-        with(:exclude_groups, [ "Developers" ]).
-        with(:include_groups, [ "Managers" ]).
+        with(:exclude_groups, [ "Developer" ]).
+        with(:include_groups, [ "Manager" ]).
         with(:owner, "kgilpin") 
     end
   end
@@ -43,7 +43,7 @@ describe "conjur-sudoers" do
     it { should contain_chef_gem("ruby-augeas") }
     it do
       should contain_template("/etc/sudoers").
-        with(:variables, :sudo_groups => [ "Managers" ], :owner => "kgilpin") 
+        with(:variables, :sudo_groups => [ "Manager" ], :owner => "kgilpin") 
     end
   end
 end
