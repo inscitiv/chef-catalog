@@ -20,7 +20,7 @@ template "/opt/inscitiv/bin/authevent" do
   mode "0500"
   owner "syslog"
   group "adm"
-  variables :queue => server_event_config[:queue], :access_key => server_event_config[:access_key_id], :secret_key => server_event_config[:secret_access_key]
+  variables :queue => server_event_config.queue, :access_key => server_event_config.identity_id, :secret_key => server_event_config.identity_secret
 end
 
 cookbook_file "/etc/rsyslog.d/75-authevent.conf" do

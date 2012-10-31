@@ -1,7 +1,7 @@
 module Inscitiv
 	module Config
     LDAPConfig = Struct.new(:hostname, :project, :root_bind_password, :uri)
-    EventConfig = Struct.new(:queue, :access_key_id, :secret_access_key)
+    EventConfig = Struct.new(:queue, :identity_id, :identity_secret)
 
 		def conjur_env
 			if env = node.inscitiv['environment']
@@ -12,13 +12,12 @@ module Inscitiv
 		end
 
     def conjur_identities
-      # TODO: aws_users is obsolete and can be removed once the cloud-conjur_identities branch is deployed
-      node.inscitiv['aws_users'] || node.inscitiv.identities
+      node.inscitiv.identities
     end
 
     def conjur_server_event_config
       identity = conjur_identities.server_events
-      EventConfig.new(identity['queue_url'], identity['access_key_id'], identity['secret_access_key'])
+      EventConfig.new(identity['resources']['queue_url'], identity['identity_id'], identity['identity_secret'])
     end
     
 		def conjur_owner
