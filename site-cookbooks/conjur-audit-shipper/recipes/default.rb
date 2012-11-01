@@ -1,9 +1,16 @@
 server_event_config = conjur_server_event_config
 
-package 'libxml2-dev' do
-end.run_action(:install)
-package 'libxslt-dev' do
-end.run_action(:install)
+case node[:platform]
+when "ubuntu","debian"
+  %w(libxml2-dev libxslt-dev)
+when "centos","redhat","fedora"
+  %w(libxml2-devel libxslt-devel)
+else
+  raise "Unable to install libxml2 and libxslt packages for platform #{node[:platform]}"
+end.each do |p|
+  package p do
+  end.run_action(:install)
+end
 
 chef_gem 'aws-sdk'
 
