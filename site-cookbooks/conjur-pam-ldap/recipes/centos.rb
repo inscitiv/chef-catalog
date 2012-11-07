@@ -24,7 +24,7 @@ ldap_config = conjur_ldap_config
 template "/etc/nslcd.conf" do
 	source "nslcd.conf.erb"
 	variables :hostname => ldap_config.hostname, :project => ldap_config.project, :root_bind_password => ldap_config.root_bind_password, :uri => ldap_config.uri.to_s
-	notifies :restart, [ "service[nscd]", "service[nslcd]" ]
+	notifies :restart, [ "service[nslcd]" ]
 end
 
 template "/etc/pam_ldap.conf" do
@@ -32,7 +32,7 @@ template "/etc/pam_ldap.conf" do
 	variables :hostname => ldap_config.hostname, :project => ldap_config.project, :root_bind_password => ldap_config.root_bind_password, :uri => ldap_config.uri.to_s
 end
 
-#execute "authconfig" do
-#	command "authconfig --updateall"
-#	notifies :restart, [ "service[nscd]", "service[nslcd]" ]
-#end
+execute "authconfig" do
+	command "authconfig --enablecache --enableldap --enableldapauth --enablemkhomedir --updateall"
+	notifies :restart, [ "service[nslcd]" ]
+end
