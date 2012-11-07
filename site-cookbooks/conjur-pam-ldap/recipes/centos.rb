@@ -27,6 +27,11 @@ template "/etc/nslcd.conf" do
 	notifies :restart, [ "service[nscd]", "service[nslcd]" ]
 end
 
+template "/etc/pam_ldap.conf" do
+	source "pam_ldap.conf.erb"
+	variables :hostname => ldap_config.hostname, :project => ldap_config.project, :root_bind_password => ldap_config.root_bind_password, :uri => ldap_config.uri.to_s
+end
+
 #execute "authconfig" do
 #	command "authconfig --updateall"
 #	notifies :restart, [ "service[nscd]", "service[nslcd]" ]
