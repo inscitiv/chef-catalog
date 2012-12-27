@@ -1,5 +1,14 @@
-package "libaugeas-dev"
-package "augeas-tools"
+case node[:platform]
+when "ubuntu","debian"
+  %w(libaugeas-dev augeas-tools)
+when "centos","redhat","fedora"
+  %w(augeas)
+else
+  raise "Unable to install agueas packages for platform #{node[:platform]}"
+end.each do |p|
+  package p do
+  end.run_action(:install)
+end
 
 # Answer the installer questions about LDAP server location, root name, etc
 template "/tmp/ldap.seed" do

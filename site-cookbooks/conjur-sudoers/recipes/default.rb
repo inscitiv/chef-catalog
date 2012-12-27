@@ -1,6 +1,13 @@
 include_recipe "build-essential"
 
-for p in %w(pkg-config libaugeas-dev libldap2-dev libsasl2-dev)
+case node[:platform]
+when "ubuntu","debian"
+  %w(pkg-config libaugeas-dev libldap2-dev libsasl2-dev)
+when "centos","redhat","fedora"
+  %w(augeas augeas-devel openldap-devel)
+else
+  raise "Unable to install augeas packages for platform #{node[:platform]}"
+end.each do |p|
   package p do
   end.run_action(:install)
 end
